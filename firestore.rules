@@ -1,0 +1,60 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Default deny all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() > 0 && id.size() <= 128;
+    }
+
+    // User profile document and user-owned data
+    match /users/{userId} {
+      allow read: if isOwner(userId);
+      allow create, update: if isOwner(userId);
+      allow delete: if isOwner(userId);
+
+      // Categorias subcollection
+      match /categorias/{categoriaId} {
+        allow read, write: if isOwner(userId);
+      }
+
+      // Movimientos subcollection
+      match /movimientos/{movimientoId} {
+        allow read, write: if isOwner(userId);
+      }
+
+      // Metas subcollection
+      match /metas/{metaId} {
+        allow read, write: if isOwner(userId);
+      }
+
+      // Retos subcollection
+      match /retos/{retoId} {
+        allow read, write: if isOwner(userId);
+      }
+
+      // Historial de Desafíos completados
+      match /historial_desafios/{historialId} {
+        allow read, write: if isOwner(userId);
+      }
+    }
+
+    // Colección global de Desafíos Financieros (banco de desafíos educativos del juego)
+    match /desafios/{desafioId} {
+      allow read: if true;
+      allow write: if isSignedIn();
+    }
+  }
+}

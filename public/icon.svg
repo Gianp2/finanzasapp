@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <rect width="512" height="512" rx="128" fill="#4A5A2E"/>
+  <circle cx="256" cy="256" r="170" fill="#E2E7D5" opacity="0.18"/>
+  <!-- Elegant Finance & Growth Leaf / Coin Emblem -->
+  <g transform="translate(136, 126)">
+    <path d="M120 10 C180 10, 230 60, 230 120 C230 190, 170 240, 120 250 C70 240, 10 190, 10 120 C10 60, 60 10, 120 10 Z" fill="#EEEDE4"/>
+    <path d="M120 40 C155 75, 175 120, 175 160 C175 190, 155 215, 120 225 C85 215, 65 190, 65 160 C65 120, 85 75, 120 40 Z" fill="#4A5A2E"/>
+    <!-- Dollar / Growth Accent -->
+    <path d="M120 85 L120 175 M105 105 C105 95, 135 95, 135 115 C135 135, 105 135, 105 155 C105 170, 135 170, 135 160" stroke="#E2E7D5" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  </g>
+</svg>

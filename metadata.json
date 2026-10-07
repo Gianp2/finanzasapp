@@ -1,0 +1,6 @@
+{
+  "name": "Finanzas - Presupuesto Personal y Control de Gastos",
+  "description": "App web de finanzas personales, presupuesto mensual, control consciente de gastos, retos diarios y proyecciones de ahorro.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

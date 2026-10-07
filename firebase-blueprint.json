@@ -1,0 +1,245 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Información del perfil de usuario y configuración de presupuesto",
+      "type": "object",
+      "properties": {
+        "nombre": {
+          "type": "string",
+          "description": "Nombre visible del usuario",
+          "maxLength": 100
+        },
+        "email": {
+          "type": "string",
+          "description": "Correo electrónico del usuario",
+          "maxLength": 150
+        },
+        "presupuestoMensual": {
+          "type": "number",
+          "description": "Presupuesto asignado para el mes en curso"
+        },
+        "moneda": {
+          "type": "string",
+          "description": "Símbolo de la moneda",
+          "maxLength": 10
+        },
+        "rachaRetos": {
+          "type": "number",
+          "description": "Días seguidos cumpliendo retos diarios"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Marca de tiempo de última actualización"
+        }
+      },
+      "required": ["nombre", "presupuestoMensual", "moneda"]
+    },
+    "Categoria": {
+      "title": "Categoria",
+      "description": "Categoría de gasto con límite presupuestario",
+      "type": "object",
+      "properties": {
+        "nombre": {
+          "type": "string",
+          "description": "Nombre de la categoría",
+          "maxLength": 60
+        },
+        "icono": {
+          "type": "string",
+          "description": "Identificador del icono de la categoría",
+          "maxLength": 40
+        },
+        "limiteMensual": {
+          "type": "number",
+          "description": "Límite mensual asignado a la categoría"
+        },
+        "color": {
+          "type": "string",
+          "description": "Color personalizado o código hexadecimal",
+          "maxLength": 30
+        }
+      },
+      "required": ["nombre", "icono", "limiteMensual"]
+    },
+    "Movimiento": {
+      "title": "Movimiento",
+      "description": "Transacción monetaria de ingreso o gasto",
+      "type": "object",
+      "properties": {
+        "tipo": {
+          "type": "string",
+          "description": "Tipo de transacción: 'ingreso' o 'gasto'",
+          "enum": ["ingreso", "gasto"]
+        },
+        "monto": {
+          "type": "number",
+          "description": "Monto de la transacción en moneda local"
+        },
+        "categoriaId": {
+          "type": "string",
+          "description": "ID de la categoría asignada o 'ingreso'",
+          "maxLength": 80
+        },
+        "categoriaNombre": {
+          "type": "string",
+          "description": "Nombre de la categoría legible",
+          "maxLength": 80
+        },
+        "fecha": {
+          "type": "string",
+          "description": "Fecha y hora en formato ISO 8601",
+          "maxLength": 40
+        },
+        "nota": {
+          "type": "string",
+          "description": "Detalle o descripción de la transacción",
+          "maxLength": 200
+        },
+        "recurrente": {
+          "type": "boolean",
+          "description": "Indica si la transacción se repite mensualmente"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Fecha de registro",
+          "maxLength": 40
+        }
+      },
+      "required": ["tipo", "monto", "fecha", "nota"]
+    },
+    "Meta": {
+      "title": "Meta",
+      "description": "Meta de ahorro del usuario",
+      "type": "object",
+      "properties": {
+        "nombre": {
+          "type": "string",
+          "description": "Nombre de la meta de ahorro (ej. Viaje a Bariloche)",
+          "maxLength": 100
+        },
+        "objetivo": {
+          "type": "number",
+          "description": "Monto objetivo a alcanzar"
+        },
+        "ahorrado": {
+          "type": "number",
+          "description": "Monto acumulado ahorrado hasta la fecha"
+        },
+        "icono": {
+          "type": "string",
+          "description": "Icono de la meta",
+          "maxLength": 40
+        }
+      },
+      "required": ["nombre", "objetivo", "ahorrado"]
+    },
+    "Reto": {
+      "title": "Reto",
+      "description": "Desafío diario de decisión financiera consciente",
+      "type": "object",
+      "properties": {
+        "fecha": {
+          "type": "string",
+          "description": "Fecha del reto (YYYY-MM-DD)",
+          "maxLength": 20
+        },
+        "pregunta": {
+          "type": "string",
+          "description": "Pregunta reflexiva del reto",
+          "maxLength": 200
+        },
+        "descripcion": {
+          "type": "string",
+          "description": "Contexto del dilema",
+          "maxLength": 400
+        },
+        "decision": {
+          "type": "string",
+          "description": "Decisión tomada: 'ahorro' o 'gasto' o pendiente",
+          "maxLength": 40
+        },
+        "monto": {
+          "type": "number",
+          "description": "Monto en juego en la decisión"
+        },
+        "completado": {
+          "type": "boolean",
+          "description": "Si el reto fue respondido"
+        },
+        "impacto": {
+          "type": "string",
+          "description": "Resumen del impacto financiero",
+          "maxLength": 200
+        }
+      },
+      "required": ["fecha", "pregunta", "completado"]
+    },
+    "Desafio": {
+      "title": "Desafio",
+      "description": "Desafío financiero con dilema realista, opciones educativas e impacto económico",
+      "type": "object",
+      "properties": {
+        "titulo": { "type": "string" },
+        "situacion": { "type": "string" },
+        "categoria": { "type": "string" },
+        "montoInvolucrado": { "type": "number" },
+        "dificultad": { "type": "string" },
+        "tipoDesafio": { "type": "string" },
+        "activo": { "type": "boolean" },
+        "opciones": { "type": "array" }
+      },
+      "required": ["titulo", "situacion", "categoria", "montoInvolucrado", "opciones", "activo"]
+    },
+    "HistorialDesafio": {
+      "title": "HistorialDesafio",
+      "description": "Registro de desafío completado por el usuario",
+      "type": "object",
+      "properties": {
+        "desafioId": { "type": "string" },
+        "desafioTitulo": { "type": "string" },
+        "categoria": { "type": "string" },
+        "opcionElegidaId": { "type": "string" },
+        "opcionElegidaTexto": { "type": "string" },
+        "tipoImpacto": { "type": "string" },
+        "impactoMonto": { "type": "number" },
+        "consecuencia": { "type": "string" },
+        "explicacionEducativa": { "type": "string" },
+        "conceptoClave": { "type": "string" },
+        "fechaCompletado": { "type": "string" },
+        "origen": { "type": "string" }
+      },
+      "required": ["desafioId", "opcionElegidaId", "fechaCompletado"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "Perfil del usuario y datos principales de configuración presupuestaria"
+    },
+    "/users/{userId}/categorias/{categoriaId}": {
+      "schema": "Categoria",
+      "description": "Categorías de presupuesto personalizadas para el usuario"
+    },
+    "/users/{userId}/movimientos/{movimientoId}": {
+      "schema": "Movimiento",
+      "description": "Movimientos de ingresos y gastos del usuario"
+    },
+    "/users/{userId}/metas/{metaId}": {
+      "schema": "Meta",
+      "description": "Metas de ahorro del usuario"
+    },
+    "/users/{userId}/retos/{retoId}": {
+      "schema": "Reto",
+      "description": "Retos diarios completados o pendientes del usuario"
+    },
+    "/users/{userId}/historial_desafios/{historialId}": {
+      "schema": "HistorialDesafio",
+      "description": "Historial de desafíos completados por el usuario"
+    },
+    "/desafios/{desafioId}": {
+      "schema": "Desafio",
+      "description": "Banco de desafíos financieros configurables"
+    }
+  }
+}
